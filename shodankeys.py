@@ -22,7 +22,7 @@ def test(key):
     except Exception:
         print "{-} Key %s is invalid!" %(key)
         return False,False
-    if info['plan'] == 'dev': #this seems to be how they are categorized
+    if info['plan'] == 'dev' or info['plan'] == 'edu': #this seems to be how they are categorized
         print "{+} Key %s appears to be valid, and bonus, paid!" %(key)
         return True,True
     elif info['plan'] == 'oss': # however I might be wrong. oh well.
