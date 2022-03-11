@@ -55,7 +55,7 @@ def main(args):
     print("\n{+} Paid Keys...")
     for key in paid_keys:
         print(key)
-    print "\n{+}Community Keys..."
+    print("\n{+}Community Keys...")
     for key in comm_keys:
         print(key)
 
