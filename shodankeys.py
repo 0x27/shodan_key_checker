@@ -16,17 +16,17 @@ import sys
 
 def test(key):
     api = shodan.Shodan(key)
-    print "{+} Testing Key: %s" %(key)
+    print("{+} Testing Key: %s" %(key))
     try:
         info = api.info()
     except Exception:
-        print "{-} Key %s is invalid!" %(key)
+        print("{-} Key %s is invalid!" %(key))
         return False,False
     if info['plan'] == 'dev' or info['plan'] == 'edu': #this seems to be how they are categorized
-        print "{+} Key %s appears to be valid, and bonus, paid!" %(key)
+        print("{+} Key %s appears to be valid, and bonus, paid!" %(key))
         return True,True
     elif info['plan'] == 'oss': # however I might be wrong. oh well.
-        print "{*} Key %s appears to be valid! Not paid for though!" %(key)
+        print("{*} Key %s appears to be valid! Not paid for though!" %(key))
         return True,False
 
 
@@ -49,15 +49,15 @@ def main(args):
                 comm_keys.append(key)
         else:
             pass
-    print "\n\n{+} Acquired %d valid keys" %(len(valid_keys))
-    print "{+} Acquired %d paid-keys" %(len(paid_keys))
-    print "{+} Acquired %d community-keys" %(len(comm_keys))
-    print "\n{+} Paid Keys..."
+    print("\n\n{+} Acquired %d valid keys" %(len(valid_keys)))
+    print("{+} Acquired %d paid-keys" %(len(paid_keys)))
+    print("{+} Acquired %d community-keys" %(len(comm_keys)))
+    print("\n{+} Paid Keys...")
     for key in paid_keys:
-        print key
-    print "\n{+}Community Keys..."
+        print(key)
+    print("\n{+}Community Keys...")
     for key in comm_keys:
-        print key
+        print(key)
 
 
 if __name__ == "__main__":
