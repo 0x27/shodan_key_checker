@@ -19,4 +19,4 @@ pip install shodan
 [Licenced under the WTFPL](http://wtfpl.net)
 
 ## Beer
-All beer donations can go to 1F3sPdKSEL9mM8LBnymGG8Dv3QCPDSRYeh ;)
+Don't donate anything to me, buy someone you don't know a beer next time you go out

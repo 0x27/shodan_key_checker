@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 # coding: utf-8
 # Quick script I wrote for sorting and categorizing Shodan API
 # keys 'borrowed' en masse from Github. 
@@ -6,27 +6,25 @@
 # can do more with a paid key, so its best to not burn those on
 # just blasting out queries all day erry day.
 # 
-# Author: skyhighatrist \ @dailydavedavids \ 0x27.me
-# Licence: WTFPL \ http://wtfpl.net
-# BTC: 1F3sPdKSEL9mM8LBnymGG8Dv3QCPDSRYeh
-# Ver: 05102015.1
-# https://github.com/0x27
+# Forked and updated from: https://github.com/0x27/shodan_key_checker
+
 import shodan
 import sys
+import crayons
 
 def test(key):
     api = shodan.Shodan(key)
-    print "{+} Testing Key: %s" %(key)
+    print("{+} Testing Key: %s" %(key))
     try:
         info = api.info()
     except Exception:
-        print "{-} Key %s is invalid!" %(key)
+        print(crayons.red(f"[-] Key {key} is invalid!"))
         return False,False
     if info['plan'] == 'dev' or info['plan'] == 'edu': #this seems to be how they are categorized
-        print "{+} Key %s appears to be valid, and bonus, paid!" %(key)
+        print(crayons.green(f"[+] Key {key} appears to be valid, and bonus, paid!"))
         return True,True
     elif info['plan'] == 'oss': # however I might be wrong. oh well.
-        print "{*} Key %s appears to be valid! Not paid for though!" %(key)
+        print(crayons.cyan(f"[*] Key {key} appears to be valid! Not paid for though!"))
         return True,False
 
 
@@ -49,15 +47,18 @@ def main(args):
                 comm_keys.append(key)
         else:
             pass
-    print "\n\n{+} Acquired %d valid keys" %(len(valid_keys))
-    print "{+} Acquired %d paid-keys" %(len(paid_keys))
-    print "{+} Acquired %d community-keys" %(len(comm_keys))
-    print "\n{+} Paid Keys..."
-    for key in paid_keys:
-        print key
-    print "\n{+}Community Keys..."
-    for key in comm_keys:
-        print key
+    if len(valid_keys) > 0:
+        print (f"\n\n[+] Acquired {len(valid_keys)} valid keys")
+        print (crayons.green(f"[+] Acquired {len(paid_keys)} paid-keys"))
+        print (crayons.cyan(f"[+] Acquired {len(comm_keys)} community-keys"))
+        print ("\n{+} Paid Keys...")
+        for key in paid_keys:
+            print (key)
+        print ("\n{+}Community Keys...")
+        for key in comm_keys:
+            print (key)
+    else:
+        print (f"\n\n[-] Zero valid keys acquired (._.)")
 
 
 if __name__ == "__main__":
